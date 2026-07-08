@@ -1,0 +1,1 @@
+//hiding most of the details and showing onlywhat is necessary
