@@ -130,6 +130,7 @@ int main()
     Burger* bg = fct->create_burger(data_burger);
    if(bg) bg->prepare_burger();
    if(bd) bd->prepare_bread();
+//  --------->
    delete fct;
    delete bg;
    delete bd;
