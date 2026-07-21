@@ -1,3 +1,5 @@
+#ifndefine  RESTURANT_H
+#define RESTURANT_H
 #include <bits/stdc++.h>
 using namespace std;
 class Resturant {
@@ -21,6 +23,30 @@ class Resturant {
         menu.clear();
     }
     
-    void
+    void addItem(const MenutItem* new_item)
+    {
+        menu.push_back(new_item);
+    }
+    void getName()
+    {
+        return this -> name;
+    }
+    void setName(const string &name)
+    {
+        this -> name = name;
+    }
+    vector<MenutItem*> getMenu()
+    {
+        return menu;
+    }
+    void setLocation(const &string loc)
+    {
+        this -> location = loc;
+    }
+    void getLocation()
+    {
+        return address;
+    }
 };
 int Resturant :: curr_resturant_id = 0;
+#endif
