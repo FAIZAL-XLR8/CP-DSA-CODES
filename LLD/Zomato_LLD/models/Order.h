@@ -11,7 +11,7 @@ class Order{
     PaymentStratergy* p;
     double total;
     static int curr_id;
-    
+
     public :
     Order (User* user, int id, vector<MenuItem*>items, Resturant* rest, PaymentStratergy* p)
     {
@@ -42,7 +42,8 @@ double getCost()
 bool processPayment()
 {
 if (p) {
-    p->pay(getCost());
+
+    p->pay(user, getCost(), rest, items);
     return true;
 } 
 return false;
