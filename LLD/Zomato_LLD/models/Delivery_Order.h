@@ -8,7 +8,7 @@ class DeliveryOrder{
     public :
     DeliveryOrder() address = "";
     string getAddress() return this -> address;
-    void setAddress(const string &address)
+    void setUserAddress(const string &address)
     {
         this -> address = address;
     }

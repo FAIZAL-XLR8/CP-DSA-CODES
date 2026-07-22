@@ -9,7 +9,9 @@ class Order{
     Resturant* rest;
     vector<MenuItem*>items;
     PaymentStratergy* p;
+    double total;
     static int curr_id;
+    
     public :
     Order (User* user, int id, vector<MenuItem*>items, Resturant* rest, PaymentStratergy* p)
     {
@@ -18,6 +20,7 @@ class Order{
         this -> items = items;
         this-> rest = rest;
         this-> p = p;
+        this->total = 0.0;
     }
 ~Order()
 {
@@ -66,6 +69,9 @@ void setResturant(Resturant* rest)
     this->rest = rest;
 }
 virtual string getType() = 0;
+void setTotal(double * total) {
+    this -> total = total;
+}
 };
 int Order :: curr_id = 0;
 #endif

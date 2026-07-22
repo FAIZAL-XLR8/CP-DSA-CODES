@@ -5,8 +5,9 @@ using namespace std;
 class PickupOrder{
     private :
     string resturantAdress;
+    public :
     PickupOrder() resturantAdress = "";
-    void setAddress(const string &resturant_address)
+    void setResturantAddress(const string &resturant_address)
     {
         this -> resturant_address = resturant_address
     }
