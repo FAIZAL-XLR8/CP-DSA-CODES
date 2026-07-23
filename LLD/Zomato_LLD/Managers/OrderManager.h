@@ -10,5 +10,9 @@ class OrderManager{
     {
         order_lists.push_back(order);
     }
+    vector<Order*> getAllOrders()
+    {
+        return order_lists;
+    }
 };
 #endif
