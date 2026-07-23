@@ -3,6 +3,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 class PaymentStratergy {
-    virtual void pay(User* user, double total, Resturant* rest, vector<MenutItem*>items) = 0;
+    virtual void pay( double total) = 0;
 };
 #endif

@@ -2,7 +2,7 @@
 #define ORDER_NOW_H
 #include <bits/stdc++.h>
 using namespace std;
-class OrderNow{
+class OrderNow : public OrderFactory{
     public :
     Order* createOrder(User* user, Resturant* resturant, PaymentStratergy* paymentstratergy, double total, string type)
     {

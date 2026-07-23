@@ -2,7 +2,7 @@
 #define ORDER_SCHEDULE_H
 #include <bits/stdc++.h>
 using namespace std;
-class OrderSchedule{
+class OrderSchedule : public Order{
     public :
     Order* createOrder(User* user, Resturant* resturant, PaymentStratergy* paymentstratergy, double total, string type)
     {

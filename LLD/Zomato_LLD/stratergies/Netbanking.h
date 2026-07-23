@@ -9,18 +9,8 @@ class Netbanking_Stratergy{
     Resturant* resturant;
     vector<MenuItem*> items;
     public : 
-    void pay(User* user, double total, Resturant* resturant, vector<MenutItem*>items) override {
-        this-> user = user;
-        this-> total = total;
-        this-> resturant = resturant;
-        this-> items = items;
-        cout << "payment for \n";
-        for (int i = 0; i < items.size(); ++i)
-        {
-            cout << (items[i])->getName() <<" ";
-        }
-        cout << endl;
-        cout <<"paid a total amount of\n" << total << endl;
+    void pay( double total) override {
+        cout <<"paid a total amount of\n" << total << "Using Netbanking" << endl;
     }
 };
 #endif

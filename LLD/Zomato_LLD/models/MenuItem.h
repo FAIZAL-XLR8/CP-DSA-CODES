@@ -8,11 +8,8 @@ class MenutItem{
     static int curr_item_id;
     double price;
     public :
-    MenuItem (const string &name, const double& price)
+    MenuItem ()
     {
-        this -> name = name;
-        this -> price = price;
-        this -> item_id = ++curr_item_id;
     }
     int getCode() return this-> curr_item_id;
     string getname() return this-> name;
