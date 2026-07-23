@@ -10,6 +10,7 @@ using namespace std;
 class ResturantManager {
 private:
     vector<Resturant*> resturant_lists;
+    static ResturantManager* instance;
     ResturantManager() = default;
 
 public:
@@ -17,12 +18,12 @@ public:
     ResturantManager& operator=(const ResturantManager&) = delete;
 
     static ResturantManager* getInstance() {
-        static ResturantManager instance;
-        return &instance;
+        return instance;
     }
 
     void addResturant(Resturant* rest) {
         resturant_lists.push_back(rest);
+        cout << "Added resturant with name : " << rest -> getName() << endl;
     }
 
     vector<Resturant*> getResturant() {
@@ -43,5 +44,7 @@ public:
         return results;
     }
 };
+
+ResturantManager* ResturantManager::instance = new ResturantManager();
 
 #endif // RESTURANT_MANAGER_H

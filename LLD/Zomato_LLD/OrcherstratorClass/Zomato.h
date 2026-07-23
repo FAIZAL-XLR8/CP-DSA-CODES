@@ -26,6 +26,7 @@ class TomatoApp {
 private:
     ResturantManager* rest_manag;
     OrderManager* order_manag;
+    static TomatoApp* instance;
     TomatoApp() {
         rest_manag = ResturantManager::getInstance();
         order_manag = OrderManager::getInstance();
@@ -36,8 +37,7 @@ public:
     TomatoApp& operator=(const TomatoApp&) = delete;
 
     static TomatoApp* getInstance() {
-        static TomatoApp instance;
-        return &instance;
+        return instance;
     }
 
     void seedResturants() {
@@ -168,6 +168,8 @@ public:
         cout << "total amount of cart is " << crt->getTotalCost() << endl;
     }
 };
+
+TomatoApp* TomatoApp::instance = new TomatoApp();
 
 using Zomato = TomatoApp;
 
