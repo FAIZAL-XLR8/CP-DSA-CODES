@@ -7,14 +7,14 @@ using namespace std;
 class Cart {
 private:
     Resturant* resturant;
-    vector<MenuItem> items;
+    vector<MenuItem*> items;
 
 public:
     Cart() {
         resturant = nullptr;
     }
 
-    void addItem(const MenuItem& item) {
+    void addItem( MenuItem* item) {
         if (!restaurant) {
             cerr << "Cart: Set a restaurant before adding items." << endl;
             return;

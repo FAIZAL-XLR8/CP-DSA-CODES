@@ -2,12 +2,9 @@
 #define UPI_H
 #include <bits/stdc++.h>
 using namespace std;
-class UPI_Stratergy{
-    pribvate :
-    User* user;
+class UPI_Stratergy : public PaymentStratergy{
+    private :
     double total;
-    Resturant* resturant;
-    vector<MenuItem*> items;
     public : 
     void pay(double total) override {
   

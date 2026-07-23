@@ -7,11 +7,13 @@ class MenutItem{
     string name;
     static int curr_item_id;
     double price;
+    int id;
     public :
     MenuItem ()
     {
+        this -> id = ++curr_item_id;
     }
-    int getCode() return this-> curr_item_id;
+    int getId() return this-> id;
     string getname() return this-> name;
     double getPrice() return this-> price;
     void setPrice (const double &price)

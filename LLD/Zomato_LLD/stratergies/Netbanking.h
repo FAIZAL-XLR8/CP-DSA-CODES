@@ -2,12 +2,10 @@
 #define Netbanking_H
 #include <bits/stdc++.h>
 using namespace std;
-class Netbanking_Stratergy{
-    pribvate :
-    User* user;
+class Netbanking_Stratergy : public PaymentStratergy{
+    private :
     double total;
-    Resturant* resturant;
-    vector<MenuItem*> items;
+  
     public : 
     void pay( double total) override {
         cout <<"paid a total amount of\n" << total << "Using Netbanking" << endl;

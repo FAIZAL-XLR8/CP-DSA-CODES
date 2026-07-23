@@ -6,6 +6,7 @@ class Zomato{
     private :
     static Zomato instance;
     ResturantManager* rest_manag;
+    OrderManager* order_manag;
     public :
     Zomato getInstance() return instance;
     void seedResturants()
@@ -45,13 +46,23 @@ class Zomato{
     {
         user -> cart -> setRestaurant(rest);
     }
-    void addToCart(User* user, MenuItem* item)
+    void addToCart(User* user, int id)
     {
         Resturant* resturant = user -> cart -> getRestaurant();
         if (resturant == nullptr)
         {cout << "Please select a resturant first "; return;}
+        MenuItem* item_to_add = nullptr;
+        for (auto item : resturant -> getMenu())
+        {
+            if (item -> getId() == id)
+            {
+                item_to_add = item;
+                break;
+            }
+        }
         Cart* ct = user->getCart();
-        ct->addItem(item);
+        ct->addItem(item_to_add);
+        cout <<"item added to the cart \n"<<endl;
     }
     void viewCart(User* user)
     {
@@ -91,10 +102,12 @@ class Zomato{
         Restaurant* resturant = crt->getRestaurant();
         double total = crt -> getTotalCost();
         Order* order = dedicated_factory -> createOrder(user,  resturant,  paymentstratergy, total,  type);
+        order_manag = OrderManager::getInstance();
+        order_manag -> addOrder(order);
         return order;
         
     }
-    void payForCart(Order* order, NotificationFactory* factory, string mobile, string email, string message, string type)
+    void payForCart(Order* order, NotificationFactory* factory, string mobile, string email, string type)
     {
        
         if (order ->getCost() == 0.0)
@@ -115,6 +128,17 @@ class Zomato{
         {
             cout <<"Payment failed\n";
         }
+    }
+    void printUserCart(User* user)
+    {
+        Cart* crt =  user -> getCart()
+        
+        for (auto item : crt->getItems())
+        {
+            cout << item -> getname() << " " << item -> getPrice();
+        }
+        cout << endl;
+        cout << "total amount of cart is " << crt -> getTotalCost();
     }
 
 };
