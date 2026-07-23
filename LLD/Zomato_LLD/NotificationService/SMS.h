@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "NotificationService/NotificationAbstract.h"
+#include "NotificationAbstract.h"
 
 using namespace std;
 

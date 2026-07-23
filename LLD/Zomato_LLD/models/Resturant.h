@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "models/MenuItem.h"
+#include "MenuItem.h"
 
 using namespace std;
 

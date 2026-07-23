@@ -2,7 +2,7 @@
 #define PICKUP_ORDER_H
 
 #include <string>
-#include "models/Order.h"
+#include "Order.h"
 
 using namespace std;
 

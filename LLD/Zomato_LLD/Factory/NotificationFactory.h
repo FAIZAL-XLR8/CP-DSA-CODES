@@ -2,7 +2,7 @@
 #define NOTIFICATION_FACTORY_H
 
 #include <string>
-#include "NotificationService/NotificationAbstract.h"
+#include "../NotificationService/NotificationAbstract.h"
 
 using namespace std;
 

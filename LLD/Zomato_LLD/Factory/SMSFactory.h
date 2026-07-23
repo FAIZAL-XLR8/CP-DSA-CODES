@@ -2,8 +2,8 @@
 #define SMS_FACTORY_H
 
 #include <string>
-#include "Factory/NotificationFactory.h"
-#include "NotificationService/SMS.h"
+#include "NotificationFactory.h"
+#include "../NotificationService/SMS.h"
 
 using namespace std;
 

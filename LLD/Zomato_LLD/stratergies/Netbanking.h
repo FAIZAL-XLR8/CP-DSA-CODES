@@ -2,7 +2,7 @@
 #define NETBANKING_H
 
 #include <iostream>
-#include "stratergies/PaymentStratergy.h"
+#include "PaymentStratergy.h"
 
 using namespace std;
 

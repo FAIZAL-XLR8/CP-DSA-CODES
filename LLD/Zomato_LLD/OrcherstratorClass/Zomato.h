@@ -5,20 +5,20 @@
 #include <vector>
 #include <string>
 
-#include "models/User.h"
-#include "models/Resturant.h"
-#include "models/MenuItem.h"
-#include "models/Cart.h"
-#include "models/Order.h"
-#include "models/Delivery_Order.h"
-#include "models/Pickup_delivery.h"
-#include "stratergies/PaymentStratergy.h"
-#include "Factory/OrderFactory.h"
-#include "Factory/OrderForNow.h"
-#include "Factory/OrderSchedule.h"
-#include "Factory/NotificationFactory.h"
-#include "Managers/OrderManager.h"
-#include "Managers/ResturantManager.h"
+#include "../models/User.h"
+#include "../models/Resturant.h"
+#include "../models/MenuItem.h"
+#include "../models/Cart.h"
+#include "../models/Order.h"
+#include "../models/Delivery_Order.h"
+#include "../models/Pickup_delivery.h"
+#include "../stratergies/PaymentStratergy.h"
+#include "../Factory/OrderFactory.h"
+#include "../Factory/OrderForNow.h"
+#include "../Factory/OrderSchedule.h"
+#include "../Factory/NotificationFactory.h"
+#include "../Managers/OrderManager.h"
+#include "../Managers/ResturantManager.h"
 
 using namespace std;
 

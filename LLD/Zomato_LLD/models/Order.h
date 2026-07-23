@@ -4,10 +4,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "models/User.h"
-#include "models/Resturant.h"
-#include "models/MenuItem.h"
-#include "stratergies/PaymentStratergy.h"
+#include "User.h"
+#include "Resturant.h"
+#include "MenuItem.h"
+#include "../stratergies/PaymentStratergy.h"
 
 using namespace std;
 
