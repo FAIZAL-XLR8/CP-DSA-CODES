@@ -3,6 +3,7 @@
 #include <bits/stc++.h>
 using namespace std;
 class ResturantManager{
+    static ResturantManager* instance;
     vector<Resturant*> resturant_lists;
     public : 
     void addResturant (Resturant* rest)
@@ -28,5 +29,10 @@ class ResturantManager{
         }
         return results;
     }
+    ResturantManager* getInstance()
+    {
+        return instance;
+    }
 };
+ResturantManager* ResturantManager:: instance = new ResturantManager();
 #endif
