@@ -1,7 +1,11 @@
 #ifndef CART_H
 #define CART_H
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include "models/MenuItem.h"
+#include "models/Resturant.h"
+
 using namespace std;
 
 class Cart {
@@ -14,8 +18,8 @@ public:
         resturant = nullptr;
     }
 
-    void addItem( MenuItem* item) {
-        if (!restaurant) {
+    void addItem(MenuItem* item) {
+        if (!resturant) {
             cerr << "Cart: Set a restaurant before adding items." << endl;
             return;
         }
@@ -25,30 +29,30 @@ public:
     double getTotalCost() const {
         double sum = 0;
         for (const auto& it : items) {
-            sum += it.getPrice();
+            sum += it->getPrice();
         }
         return sum;
     }
 
     bool isEmpty() {
-        return (!restaurant || items.empty());
+        return (!resturant || items.empty());
     }
 
     void clear() {
         items.clear();
-        restaurant = nullptr;
+        resturant = nullptr;
     }
 
     // Getters and Setters
-    void setRestaurant(Restaurant* r) {
-        restaurant = r;
+    void setRestaurant(Resturant* r) {
+        resturant = r;
     }
 
-    Restaurant* getRestaurant() const {
-        return restaurant;
+    Resturant* getRestaurant() const {
+        return resturant;
     }
 
-    const vector<MenuItem>& getItems() const {
+    const vector<MenuItem*>& getItems() const {
         return items;
     }
 };

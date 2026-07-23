@@ -1,38 +1,47 @@
 #ifndef RESTURANT_MANAGER_H
 #define RESTURANT_MANAGER_H
-#include <bits/stc++.h>
+
+#include <vector>
+#include <string>
+#include "models/Resturant.h"
+
 using namespace std;
-class ResturantManager{
-    static ResturantManager* instance;
+
+class ResturantManager {
+private:
     vector<Resturant*> resturant_lists;
-    public : 
-    void addResturant (Resturant* rest)
-    {
+    ResturantManager() = default;
+
+public:
+    ResturantManager(const ResturantManager&) = delete;
+    ResturantManager& operator=(const ResturantManager&) = delete;
+
+    static ResturantManager* getInstance() {
+        static ResturantManager instance;
+        return &instance;
+    }
+
+    void addResturant(Resturant* rest) {
         resturant_lists.push_back(rest);
     }
-    vector<Resturant*> getResturant()
-    {
+
+    vector<Resturant*> getResturant() {
         return resturant_lists;
     }
-    ~ResturantManager()
-    {
+
+    ~ResturantManager() {
         resturant_lists.clear();
     }
-    vector<Resturant*> searchByLocation(const string &location)
-    {
+
+    vector<Resturant*> searchByLocation(const string &location) {
         vector<Resturant*> results;
-        for (auto &res : resturant_lists)
-        {
-            if (res -> getLocation() == location){
+        for (auto &res : resturant_lists) {
+            if (res->getLocation() == location) {
                 results.push_back(res);
             }
         }
         return results;
     }
-    ResturantManager* getInstance()
-    {
-        return instance;
-    }
 };
-ResturantManager* ResturantManager:: instance = new ResturantManager();
-#endif
+
+#endif // RESTURANT_MANAGER_H

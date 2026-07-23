@@ -1,17 +1,25 @@
 #ifndef SMS_NOTIFICATION_H
 #define SMS_NOTIFICATION_H
-#include <bits/stdc++.h>
+
+#include <iostream>
+#include <string>
+#include "NotificationService/NotificationAbstract.h"
+
 using namespace std;
-class SMSNotificationStratergy  :  public Notification{
+
+class SMSNotificationStratergy : public Notification {
+private:
     string mobile;
-   public :
-   SMSNotificationStratergy(string number) 
-   {
-    this -> mobile = number;
-   }
-    void sendMessage (string message) {
-        cout <<"Message sent to the number : " << mobile << endl << message;
+public:
+    SMSNotificationStratergy(string number) {
+        this->mobile = number;
     }
-    ~SMSNotificationStratergy() = default;
+
+    void sendMessage(string message) override {
+        cout << "Message sent to the number : " << mobile << endl << message << endl;
+    }
+
+    ~SMSNotificationStratergy() override = default;
 };
-#endif
+
+#endif // SMS_NOTIFICATION_H

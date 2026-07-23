@@ -1,37 +1,38 @@
-#ifndef ORDER_NOW
+#ifndef ORDER_NOW_H
 #define ORDER_NOW_H
-#include <bits/stdc++.h>
-using namespace std;
-class OrderNow : public OrderFactory{
-    public :
-    Order* createOrder(User* user, Resturant* resturant, PaymentStratergy* paymentstratergy, double total, string type)
-    {
-        // since factory's work is to take the type AND RETURN THE EXACT OBJECT OF THE PRODUCT
-        // type will say PICKUP PRODUCT OR THE DELIVERY PRODUCT
-        Order* order = nullptr;
-        if (type == "Delivery")
-        {
-            order = new Delivery();
-            order -> setUserAddress (user -> getAddress());
 
-        }
-        else if (type == "Pickup")
-        {
-            // resturant adress
-            order = new PickupOrder();
-            order -> setResturantAddress(resturant -> getAddress());
-        }
-        else
-        {
+#include <vector>
+#include <string>
+#include "Factory/OrderFactory.h"
+#include "models/Delivery_Order.h"
+#include "models/Pickup_delivery.h"
+
+using namespace std;
+
+class OrderForNow : public OrderFactory {
+public:
+    Order* createOrder(User* user, Resturant* resturant, PaymentStratergy* paymentstratergy, double total, string type) override {
+        Order* order = nullptr;
+        if (type == "Delivery") {
+            DeliveryOrder* d_order = new DeliveryOrder();
+            d_order->setUserAddress(user->getAddress());
+            order = d_order;
+        } else if (type == "Pickup") {
+            PickupOrder* p_order = new PickupOrder();
+            p_order->setResturantAddress(resturant->getLocation());
+            order = p_order;
+        } else {
             return nullptr;
         }
-        vector<MenuItem*> items = user -> getCart() -> getItems();
-        order -> setItems(items);
-        order -> setResturant(resturant);
-        order -> setPaymentStratergy(paymentstratergy);
-        order -> setUser(user);
-        order -> setTotal(total);
+
+        vector<MenuItem*> items = user->getCart()->getItems();
+        order->setItems(items);
+        order->setResturant(resturant);
+        order->setPaymentStratergy(paymentstratergy);
+        order->setUser(user);
+        order->setTotal(total);
         return order;
     }
 };
-#endif
+
+#endif // ORDER_NOW_H

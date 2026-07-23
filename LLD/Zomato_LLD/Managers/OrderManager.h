@@ -1,25 +1,33 @@
 #ifndef ORDER_MANAGER_H
 #define ORDER_MANAGER_H
-#include <bits/stdc++.h>
+
+#include <vector>
+#include "models/Order.h"
+
 using namespace std;
-class OrderManager{
-    
-    private :
-    vector <Order*> order_lists;
-    static OrderManager* instance;
-    public :
-    static OrderManager* getInstance()
-    {
-        return instance;
+
+class OrderManager {
+private:
+    vector<Order*> order_lists;
+    OrderManager() = default;
+
+public:
+    // Delete copy constructor and assignment operator for Singleton
+    OrderManager(const OrderManager&) = delete;
+    OrderManager& operator=(const OrderManager&) = delete;
+
+    static OrderManager* getInstance() {
+        static OrderManager instance;
+        return &instance;
     }
-    void addOrder(Order* order)
-    {
+
+    void addOrder(Order* order) {
         order_lists.push_back(order);
     }
-    vector<Order*> getAllOrders()
-    {
+
+    vector<Order*> getAllOrders() {
         return order_lists;
     }
 };
-OrderManager* OrderManager :: instance = new OrderManager(); // this is eager initialisation
-#endif
+
+#endif // ORDER_MANAGER_H

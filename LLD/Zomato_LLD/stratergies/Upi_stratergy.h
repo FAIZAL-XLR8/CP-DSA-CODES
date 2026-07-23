@@ -1,14 +1,18 @@
 #ifndef UPI_H
 #define UPI_H
-#include <bits/stdc++.h>
+
+#include <iostream>
+#include "stratergies/PaymentStratergy.h"
+
 using namespace std;
-class UPI_Stratergy : public PaymentStratergy{
-    private :
-    double total;
-    public : 
+
+class UpiPaymentStrategy : public PaymentStratergy {
+public:
     void pay(double total) override {
-  
-        cout <<"paid a total amount of\n" << total << "Using UPI" << endl;
+        cout << "Paid a total amount of " << total << " using UPI" << endl;
     }
 };
-#endif
+
+using UPI_Stratergy = UpiPaymentStrategy;
+
+#endif // UPI_H

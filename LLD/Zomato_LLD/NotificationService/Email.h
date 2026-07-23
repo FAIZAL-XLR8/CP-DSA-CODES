@@ -1,19 +1,23 @@
 #ifndef EMAIL_NOTIFICATION_H
 #define EMAIL_NOTIFICATION_H
-#include <bits/stdc++.h>
+
+#include <iostream>
+#include <string>
+#include "NotificationService/NotificationAbstract.h"
+
 using namespace std;
-class EmailNotificationStratergy  : public Notification{
+
+class EmailNotificationStratergy : public Notification {
+private:
     string email;
-   public :
-   
-   EmailNotificationStratergy(string &email)
-   {
-    this -> email = email;
-   }
-    void sendMessage (string message) 
-    {
-        cout << "Message sent to " << this -> email << endl << message<< " \n " ; 
+public:
+    EmailNotificationStratergy(string email) {
+        this->email = email;
     }
-    
+
+    void sendMessage(string message) override {
+        cout << "Message sent to " << this->email << endl << message << " \n ";
+    }
 };
-#endif
+
+#endif // EMAIL_NOTIFICATION_H

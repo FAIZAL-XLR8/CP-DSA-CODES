@@ -1,22 +1,24 @@
 #ifndef GOOGLE_FACTORY_H
 #define GOOGLE_FACTORY_H
-#include <bits/stdc++.h>
+
+#include <string>
+#include "Factory/NotificationFactory.h"
+#include "NotificationService/Email.h"
+#include "NotificationService/SMS.h"
+
 using namespace std;
+
 class GoogleNotificationFactory : public NotificationFactory {
-    public :
-    //factories work is to produce products
+public:
     Notification* createNotification(string mobile, string email, string message, string type) override {
         Notification* res = nullptr;
-        if (type == "Email")
-        {
+        if (type == "Email") {
             res = new EmailNotificationStratergy(email);
-        }
-        else if (type == "SMS")
-        {
+        } else if (type == "SMS") {
             res = new SMSNotificationStratergy(mobile);
         }
         return res;
     }
-   
 };
-#endif
+
+#endif // GOOGLE_FACTORY_H

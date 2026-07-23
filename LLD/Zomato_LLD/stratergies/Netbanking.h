@@ -1,14 +1,16 @@
-#ifndef Netbanking_H
-#define Netbanking_H
-#include <bits/stdc++.h>
+#ifndef NETBANKING_H
+#define NETBANKING_H
+
+#include <iostream>
+#include "stratergies/PaymentStratergy.h"
+
 using namespace std;
-class Netbanking_Stratergy : public PaymentStratergy{
-    private :
-    double total;
-  
-    public : 
-    void pay( double total) override {
-        cout <<"paid a total amount of\n" << total << "Using Netbanking" << endl;
+
+class Netbanking_Stratergy : public PaymentStratergy {
+public:
+    void pay(double total) override {
+        cout << "Paid a total amount of " << total << " using Netbanking" << endl;
     }
 };
-#endif
+
+#endif // NETBANKING_H

@@ -1,10 +1,14 @@
 #ifndef NOTIFICATION_H
 #define NOTIFICATION_H
-#include <bits/stdc++.h>
+
+#include <string>
+
 using namespace std;
+
 class Notification {
-   public :
-   virtual void sendMessage (string message) = 0;
+public:
+    virtual void sendMessage(string message) = 0;
     virtual ~Notification() = default;
 };
-#endif
+
+#endif // NOTIFICATION_H

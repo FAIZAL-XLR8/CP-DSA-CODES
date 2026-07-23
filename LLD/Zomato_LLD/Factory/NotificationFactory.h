@@ -1,11 +1,15 @@
 #ifndef NOTIFICATION_FACTORY_H
 #define NOTIFICATION_FACTORY_H
-#include <bits/stdc++.h>
+
+#include <string>
+#include "NotificationService/NotificationAbstract.h"
+
 using namespace std;
-class NotificationFactory{
-    public :
-    //factories work is to produce products
+
+class NotificationFactory {
+public:
     virtual Notification* createNotification(string mobile, string email, string message, string type) = 0;
-    virtual ~NotificationFactory() {};
+    virtual ~NotificationFactory() = default;
 };
-#endif
+
+#endif // NOTIFICATION_FACTORY_H
