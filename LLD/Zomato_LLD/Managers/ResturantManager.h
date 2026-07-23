@@ -17,5 +17,16 @@ class ResturantManager{
     {
         resturant_lists.clear();
     }
+    vector<Resturant*> searchByLocation(const string &location)
+    {
+        vector<Resturant*> results;
+        for (auto &res : resturant_lists)
+        {
+            if (res -> getLocation() == location){
+                results.push_back(res);
+            }
+        }
+        return results;
+    }
 };
 #endif
