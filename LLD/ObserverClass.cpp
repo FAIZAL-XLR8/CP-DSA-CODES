@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 // observer interface
 class SubscriberInterface {
 public:
