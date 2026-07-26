@@ -50,17 +50,6 @@ class IObservable {
     virtual void setNotification(INotification* nt) = 0;
     virtual string getNotificationContent() = 0;
 };
-
-class LoggerObserver : public IObserver {
-    private :
-    IObservable* obs;
-    public :
-    LoggerObserver(IObservable* obs) : obs (obs) {}
-    void update() override{
-        cout << " here is the logger content " << obs ->getNotificationContent() << endl; 
-    }
-};
-
 class NotificationObservable : public IObservable {
     private :
     INotification* nt; // we need to delegate the notification to repective
@@ -95,6 +84,47 @@ public :
     }
 };
 
+class NotificationManager {
+    private :
+    vector<INotification*> list;
+    IObservable* obs;
+    static NotificationManager* instance;
+    public :
+    NotificationManager(){
+        obs = new NotificationObservable();
+    }
+    static NotificationManager* getInstance(){
+        return instance;
+    }
+    IObservable* getObservable() {
+        return obs;
+    }
+  
+    void setNotification(INotification* nt){
+        list.push_back(nt);
+        obs->setNotification(nt);
+        obs->notify();
+    }
+    vector<INotification*> getHistory()
+    {
+        return list;
+    }
+};
+NotificationManager* NotificationManager:: instance = new NotificationManager();
+
+class LoggerObserver : public IObserver {
+    private :
+    IObservable* obs;
+    public :
+    LoggerObserver() {
+        this -> obs = NotificationManager::getInstance()->getObservable();
+        this -> obs ->addObserver(this);
+    }
+    void update() override{
+        cout << " here is the logger content " << obs ->getNotificationContent() << endl; 
+    }
+};
+
 class INotificationStratergy {
     public:
     virtual void sendMessage(string content) = 0;
@@ -119,7 +149,10 @@ class NotificationEngine : public IObserver {
     //distribute to the right people who need it 
     IObservable* obs; //each observer needs to track which ibservable are they looking for
 public :
-    NotificationEngine(IObservable* obs) : obs(obs){}
+    NotificationEngine(){
+        this -> obs = NotificationManager:: getInstance() -> getObservable();
+        obs -> addObserver( this);
+    }
     void addStratergy (INotificationStratergy* stratergy) {
         list.push_back(stratergy);
     }
@@ -130,45 +163,21 @@ public :
         }
     }
 };
-class NotificationManager {
-    private :
-    vector<INotification*> list;
-    IObservable* obs;
-    static NotificationManager* instance;
-    public :
-    NotificationManager(){
-        obs = new NotificationObservable();
-    }
-    static NotificationManager* getInstance(){
-        return instance;
-    }
-    IObservable* getObservable() {
-        return obs;
-    }
-    void addObserver(IObserver* observer) {
-        obs->addObserver(observer);
-    }
-    void setNotification(INotification* nt){
-        list.push_back(nt);
-        obs->setNotification(nt);
-        obs->notify();
-    }
-    vector<INotification*> getHistory()
-    {
-        return list;
-    }
-};
-NotificationManager* NotificationManager:: instance = new NotificationManager();
 int main()
 {
     //first the message is created with needed additonal
     INotification* i = new BaseNotification();
     i  = new TimeStampDecorator(i);
     i = new SignatureDecorator(i);
+   
     NotificationManager* manager = NotificationManager::getInstance();
-    
     // Register the observer so that notify() has an observer to update and print output
-    manager->addObserver(new LoggerObserver(manager->getObservable()));
+   IObserver* log = new LoggerObserver();
+   INotificationStratergy* n1 = new EmailStratergy();
+   INotificationStratergy* n2 = new SMSStratergy();
+   NotificationEngine* ne = new NotificationEngine();
+   ne -> addStratergy(n1);
+   ne -> addStratergy(n2);
     
     manager->setNotification(i);
 }
