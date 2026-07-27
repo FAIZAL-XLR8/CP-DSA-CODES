@@ -1,5 +1,13 @@
 #include <bits/stdc++.h>
+#include<exception>
+#include<stdexcept>
 using namespace std;
+class ICommand {
+    public :
+    virtual void execute() = 0;
+    virtual void undo() = 0;
+    virtual ~ICommand() {cout << "ICommand Destructor\n"; }
+};
 class Remote{
     private :
     static Remote* instance;
@@ -17,18 +25,22 @@ class Remote{
     {
         return instance;
     }
-    void setCommand(Icommand* cmd, int idx)
+    void setCommand(ICommand* cmd, int idx)
     {
         try{
         if (idx < list.size() and idx > 0 and list[idx] != nullptr)
         {
             list[idx] = cmd;
         }
+        else if (idx < list.size() and idx > 0 and list[idx] == nullptr)
+        {
+            list[idx] = cmd;
+        }
         else{
-            throw  logical_error("Wrong input of command!")
+            throw  logic_error("Wrong input of command!");
             }
          }
-         catch(const logical_error &e)
+         catch(const logic_error &e)
          {
             cout << e.what() << endl;
          }
@@ -38,25 +50,31 @@ class Remote{
     {
             if (isPressed[idx] == true)
             {
+                list[idx] -> undo();
+                isPressed[idx] = false;
+            }
+            else
+            {
                 list[idx] -> execute();
+                isPressed[idx] = true;
             }
     }
-    
+    ~Remote(){
+        cout << "Remote destructor\n";
+    }
 };
 Remote* Remote:: instance = new Remote();
-class ICommand {
-    public :
-    virtual void execute() = 0;
-    virtual void undo() = 0;
-};
+
 class Fan{
     public :
-    void on() cout << "Fan is switched on\n";
-    void off() cout << "Fan is switched off\n";
+    void on() {cout << "Fan is switched on\n";}
+    void off() {cout << "Fan is switched off\n";}
 };
 class AC {
-    void on() cout << "AC is on\n";
-    void off() cout << "AC is off\n";
+    public:
+    void on() {cout << "AC is on\n";}
+    void off() {cout << "AC is off\n";}
+
 };
 class FanCommand : public ICommand {
     private :
@@ -69,7 +87,7 @@ class FanCommand : public ICommand {
     void execute() override {
         fan -> on();
     }
-    void undo()
+    void undo() override
     {
         fan->off();
     }
@@ -80,16 +98,30 @@ class ACCommand : public ICommand {
     ACCommand(AC* ac){
         this -> ac = ac;
     }
-    void execute()
+    void execute() override
     {
         ac -> on();
     }
-    void off()
+    void undo() override
     {
         ac -> off();
     }
 };
 int main()
 {
+    Remote* rmt = Remote :: getInstance();
+    Fan* badkaRoomFan = new Fan();
+    ICommand* cmd1 = new FanCommand(badkaRoomFan);
+    AC* ChotkaRoomAC = new AC();
+    ICommand* cmd2 = new ACCommand(ChotkaRoomAC);
+
+    rmt -> setCommand(cmd1, 1);
+    rmt -> setCommand(cmd2, 2);
+    rmt -> pressButton(1);
+    rmt -> pressButton(1);
+    rmt-> pressButton(2);
+    delete cmd1;
+    delete cmd2;
+    delete rmt;
 
 }
