@@ -14,9 +14,9 @@ class XML{
 class XMLAdapter  : public IReport{
     public :
     XML* xml;
-    XMLAdapter()
+    XMLAdapter(XML* xml)
     {
-        xml = new XML();
+       this -> xml = xml;
     }
     string getJSONData(string data)override
     {
@@ -40,8 +40,11 @@ class Client{
 int main()
 {
     Client* cl1 = new Client();
-    IReport* i = new XMLAdapter();
-    cl1 -> setAdapter(i);
+    XML* adaptee = new XML();
+    IReport* adapter = new XMLAdapter(adaptee);
+    cl1 -> setAdapter(adapter);
     cl1 -> process("Faizal");
-
+    delete adaptee;
+    delete adapter;
+    delete cl1;
 }
