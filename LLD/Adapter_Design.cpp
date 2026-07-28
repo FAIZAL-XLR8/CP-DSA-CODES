@@ -2,13 +2,13 @@
 using namespace std;
 class IReport{
     public :
-    virtual string getJSONData() = 0;
+    virtual string getJSONData(string data) = 0;
 };
 class XML{
     public:
-    string generate()
+    string generate(string data)
     {
-        return "this is xmldata";
+        return "ur data is " + data + " and this is xmldata";
     }
 };
 class XMLAdapter  : public IReport{
@@ -18,15 +18,30 @@ class XMLAdapter  : public IReport{
     {
         xml = new XML();
     }
-    string getJSONData()override
+    string getJSONData(string data)override
     {
-        string temp = xml -> generate();
+        string temp = xml -> generate(data);
         // convert into JSON
         return temp + " -> converted to JSON\n";
     }
 };
+class Client{
+    IReport* rp;
+    public:
+    void setAdapter(IReport* rp)
+    {
+        this -> rp = rp;
+    }
+    void process(string data)
+    {
+        cout << rp -> getJSONData(data);
+    }
+};
 int main()
 {
-    IReport* rp = new XMLAdapter();
-    cout << rp->getJSONData();
+    Client* cl1 = new Client();
+    IReport* i = new XMLAdapter();
+    cl1 -> setAdapter(i);
+    cl1 -> process("Faizal");
+
 }
